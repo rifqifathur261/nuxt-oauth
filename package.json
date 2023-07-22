@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.18",
-    "next-auth": "4.21.1",
-    "vue-tradingview-widgets": "^1.2.4"
+    "moment": "^2.29.4"
   }
 }

@@ -1,9 +1,21 @@
 <script setup>
+definePageMeta({
+  middleware: function (to, from) {
+    const cookies = useCookie("accessToken");
+    if (cookies.value) {
+      return navigateTo("/");
+    }
+  },
+});
+const route = useRoute();
 const supabase = useSupabaseAuthClient();
 
 const login = async () => {
   const { user, session, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
+    options: {
+      redirectTo: "/home",
+    },
   });
 
   if (error) {
@@ -12,6 +24,10 @@ const login = async () => {
   if (user) console.log("user", user);
   if (session) console.log("session", session);
 };
+
+if (route?.hash) {
+  navigateTo("/");
+}
 </script>
 
 <template>
